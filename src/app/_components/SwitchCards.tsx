@@ -55,7 +55,7 @@ export default function SwitchCards({
               setStep(1);
             }}
             variant="outline"
-            className="h-10 w-10 cursor-pointer rounded-xl border-slate-200 bg-white text-slate-600 shadow-sm transition-colors hover:bg-slate-50 hover:text-slate-950"
+            className="h-10 w-10 cursor-pointer rounded-xl border-stone-300 bg-[#fff8ee] text-stone-700 shadow-[0_12px_30px_rgba(95,74,37,0.08)] transition-colors hover:bg-[#f1a94e] hover:text-[#17332d]"
           >
             <ChevronLeft className="size-4" />
           </Button>

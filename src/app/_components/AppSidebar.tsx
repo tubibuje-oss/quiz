@@ -51,29 +51,29 @@ export function AppSidebar({
 
   return (
     <Sidebar
-      className="border-r border-slate-200 bg-white"
+      className="border-r border-stone-300/80 bg-[#f7f0e2]/85 backdrop-blur"
       collapsible="offcanvas"
     >
-      <SidebarHeader className="border-b border-slate-100 bg-white px-5 py-5">
+      <SidebarHeader className="border-b border-stone-300/80 bg-[#f7f0e2]/90 px-5 py-5">
         <div className="flex items-center justify-between gap-3">
           <div>
-            <h2 className="text-base font-semibold tracking-[-0.01em] text-slate-950">
+            <h2 className="font-[family:var(--font-display)] text-lg font-semibold tracking-[0.01em] text-stone-900">
               History
             </h2>
-            <p className="mt-1 text-sm text-slate-500">
+            <p className="mt-1 text-[13px] uppercase tracking-[0.12em] text-stone-500">
               Previously generated articles
             </p>
           </div>
           <SidebarTrigger
             variant="ghost"
             size="icon"
-            className="hidden h-9 w-9 rounded-md border border-slate-200 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 md:flex"
+            className="hidden h-9 w-9 rounded-md border border-stone-300 bg-[#fff7ec] text-stone-600 transition-colors hover:bg-[#f1a94e] hover:text-[#17332d] md:flex"
           >
             <PanelLeftIcon className="size-4" />
           </SidebarTrigger>
         </div>
       </SidebarHeader>
-      <SidebarContent className="bg-white px-3 py-4">
+      <SidebarContent className="bg-transparent px-3 py-4">
         {loading ? (
           <div className="mt-1.5 flex flex-col gap-4 px-2">
             {Array.from({ length: 30 }).map((_, index) => (
@@ -85,10 +85,10 @@ export function AppSidebar({
           </div>
         ) : articleData.length === 0 ? (
           <div className="flex flex-col items-center justify-center gap-2 px-4 py-10 text-center">
-            <p className="text-sm font-medium text-slate-600">
+            <p className="font-[family:var(--font-display)] text-base font-semibold tracking-[0.01em] text-stone-700">
               No history yet
             </p>
-            <p className="text-xs text-slate-500">
+            <p className="text-[13px] leading-6 text-stone-500">
               Your saved articles will appear here
             </p>
           </div>
@@ -103,9 +103,9 @@ export function AppSidebar({
                 variant="ghost"
                 key={index}
                 className={cn(
-                  "h-auto w-full justify-start rounded-xl px-3 py-3 text-left text-sm font-medium leading-5 text-slate-700 shadow-none transition-colors hover:bg-slate-100 hover:text-slate-950",
+                  "h-auto w-full justify-start rounded-xl border border-transparent px-3 py-3 text-left text-[15px] font-medium leading-6 text-stone-700 shadow-none transition-colors hover:border-[#e0c59f] hover:bg-[#fff8ee] hover:text-stone-950",
                   article.id === selectedArticleId &&
-                    "bg-slate-100 text-slate-950"
+                    "border-[#d8b076] bg-[#f3d6a8]/55 text-stone-950"
                 )}
               >
                 <span className="line-clamp-3 whitespace-normal break-words">

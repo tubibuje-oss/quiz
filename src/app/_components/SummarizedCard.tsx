@@ -90,29 +90,29 @@ export default function SummarizedCard({
   };
 
   return (
-    <Card className="w-full rounded-3xl border border-slate-200 bg-white shadow-[0_10px_30px_rgba(15,23,42,0.04)]">
+    <Card className="w-full rounded-[2rem] border border-amber-200/70 bg-[linear-gradient(180deg,rgba(255,250,240,0.98)_0%,rgba(245,237,220,0.98)_100%)] shadow-[0_30px_80px_rgba(92,66,28,0.14)]">
       <CardHeader className="space-y-3 px-6 pb-0 pt-6 sm:px-8 sm:pt-8">
         <div className="flex items-center gap-2.5">
           <GeminiIcon />
-          <CardTitle className="text-[24px] font-semibold tracking-[-0.02em] text-slate-950">
+          <CardTitle className="font-[family:var(--font-display)] text-[2rem] font-semibold leading-none tracking-[0.01em] text-stone-950 sm:text-[2.15rem]">
             Article Quiz Generator
           </CardTitle>
         </div>
-        <CardDescription className="text-sm text-slate-500">
+        <CardDescription className="text-[15px] leading-7 text-stone-600">
           Your article has been summarized. Review it, then generate a quiz.
         </CardDescription>
       </CardHeader>
 
       <CardContent className="flex flex-col gap-4 px-6 py-6 sm:px-8">
-        <CardDescription className="flex items-center gap-2 text-sm text-slate-500">
+        <CardDescription className="flex items-center gap-2 text-[13px] font-semibold tracking-[0.12em] text-stone-600 uppercase">
           <BookIcon /> Summarized content
         </CardDescription>
 
-        <div className="text-[26px] font-semibold leading-8 tracking-[-0.02em] text-slate-950">
+        <div className="font-[family:var(--font-display)] text-[2rem] font-semibold leading-9 tracking-[0.01em] text-stone-950">
           {title}
         </div>
 
-        <div className="max-h-[360px] overflow-y-auto rounded-2xl border border-slate-100 bg-slate-50/70 p-4 text-sm leading-6 text-slate-700">
+        <div className="max-h-[360px] overflow-y-auto rounded-2xl border border-[#e5cda4] bg-[#fff8ee]/85 p-4 text-[15px] leading-7 text-stone-700">
           {summary}
         </div>
       </CardContent>
@@ -124,18 +124,18 @@ export default function SummarizedCard({
               <Button
                 type="button"
                 variant="outline"
-                className="h-11 w-full cursor-pointer rounded-xl border-slate-200 bg-white text-sm text-slate-700 transition-colors hover:bg-slate-50 sm:w-auto"
+                className="h-11 w-full cursor-pointer rounded-xl border-stone-300 bg-[#fffaf2] text-[13px] font-semibold tracking-[0.12em] text-stone-700 uppercase transition-colors hover:bg-[#f1e3c5] sm:w-auto"
               >
                 See content
               </Button>
             </DialogTrigger>
 
-            <DialogContent className="border-slate-200 p-6 sm:max-w-3xl">
+            <DialogContent className="border-[#e5cda4] bg-[#fffaf2] p-6 sm:max-w-3xl">
               <DialogHeader>
-                <DialogTitle className="text-[24px] font-semibold tracking-[-0.02em] text-slate-950">
+                <DialogTitle className="font-[family:var(--font-display)] text-[2rem] font-semibold tracking-[0.01em] text-stone-950">
                   {title}
                 </DialogTitle>
-                <div className="max-h-[60vh] overflow-y-auto pt-2 text-sm leading-6 text-slate-700">
+                <div className="max-h-[60vh] overflow-y-auto pt-2 text-[15px] leading-7 text-stone-700">
                   {content}
                 </div>
               </DialogHeader>
@@ -145,7 +145,7 @@ export default function SummarizedCard({
 
         <Button
           type="button"
-          className="h-11 w-full cursor-pointer rounded-xl bg-slate-700 px-5 text-sm font-medium text-white transition-colors hover:bg-slate-800 disabled:bg-slate-300 sm:w-auto"
+          className="h-11 w-full cursor-pointer rounded-xl bg-[#1c5c52] px-5 text-[13px] font-semibold tracking-[0.12em] text-[#f8f2e7] uppercase transition-colors hover:bg-[#144840] disabled:bg-stone-300 sm:w-auto"
           disabled={loading || !articleId}
           onClick={handleTakeQuiz}
         >

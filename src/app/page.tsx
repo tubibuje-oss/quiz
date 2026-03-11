@@ -16,7 +16,7 @@ export default function Home() {
   const [selectedArticleId, setSelectedArticleId] = useState<string>("");
 
   return (
-    <div className="min-h-screen w-full bg-[#f6f7f8]">
+    <div className="min-h-screen w-full bg-[radial-gradient(circle_at_top,_rgba(253,186,116,0.22),_transparent_28%),linear-gradient(180deg,_#fffaf2_0%,_#f3efe4_48%,_#ebe6d8_100%)]">
       <Header />
       <SignedIn>
         <div className="mx-auto flex min-h-[calc(100vh-73px)] w-full max-w-[1600px]">
@@ -36,12 +36,12 @@ export default function Home() {
       </SignedIn>
       <SignedOut>
         <div className="flex min-h-[calc(100vh-73px)] items-center justify-center px-4 py-10">
-          <Card className="w-full max-w-sm border border-slate-200 bg-white text-center shadow-sm">
+          <Card className="w-full max-w-sm border border-amber-200/70 bg-[#fffaf0]/95 text-center shadow-[0_22px_60px_rgba(73,52,24,0.14)] backdrop-blur">
             <CardHeader className="gap-2">
-              <CardTitle className="text-xl font-semibold">
-              Sign in required 🔒
+              <CardTitle className="font-[family:var(--font-display)] text-2xl font-semibold tracking-[0.01em] text-stone-900">
+                Sign in required 🔒
               </CardTitle>
-              <CardDescription className="text-sm text-slate-500">
+              <CardDescription className="mx-auto max-w-[28ch] text-[15px] leading-7 text-stone-600">
                 You need to be singed in to continue.
                 <br />
                 Please sign in to access this feature.

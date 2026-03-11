@@ -6,6 +6,41 @@ const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
 });
 
+type QuizPayload = {
+  question: string;
+  options: string[];
+  answer: string;
+};
+
+function isQuizPayload(value: unknown): value is QuizPayload {
+  if (typeof value !== "object" || value === null) {
+    return false;
+  }
+
+  const quiz = value as Record<string, unknown>;
+
+  return (
+    typeof quiz.question === "string" &&
+    Array.isArray(quiz.options) &&
+    quiz.options.every((option) => typeof option === "string") &&
+    typeof quiz.answer === "string"
+  );
+}
+
+function getErrorDetails(error: unknown) {
+  if (error instanceof Error) {
+    return {
+      message: error.message,
+      stack: error.stack ?? null,
+    };
+  }
+
+  return {
+    message: "Failed to generate quizzes",
+    stack: null,
+  };
+}
+
 export async function POST(
   request: NextRequest,
   context: { params: Promise<{ articleId: string }> },
@@ -78,12 +113,12 @@ ${article.content}
 
     console.log("cleanedText:", cleanedText);
 
-    let parsed: any;
+    let parsed: unknown;
 
     try {
       parsed = JSON.parse(cleanedText);
       console.log("parsed:", parsed);
-    } catch (parseError: any) {
+    } catch (parseError: unknown) {
       console.error("Quiz JSON parse error:", parseError);
       console.error("Raw AI response:", rawText);
 
@@ -96,7 +131,11 @@ ${article.content}
       );
     }
 
-    if (!Array.isArray(parsed) || parsed.length === 0) {
+    if (
+      !Array.isArray(parsed) ||
+      parsed.length === 0 ||
+      !parsed.every(isQuizPayload)
+    ) {
       return NextResponse.json(
         { error: "AI returned empty or invalid quiz array" },
         { status: 500 },
@@ -104,7 +143,7 @@ ${article.content}
     }
 
     await prisma.quiz.createMany({
-      data: parsed.map((q: any) => ({
+      data: parsed.map((q) => ({
         articleId,
         question: q.question,
         options: q.options,
@@ -125,15 +164,16 @@ ${article.content}
       },
       { status: 200 },
     );
-  } catch (err: any) {
+  } catch (err: unknown) {
+    const errorDetails = getErrorDetails(err);
     console.error("Generate quizzes error FULL:", err);
-    console.error("Generate quizzes error MESSAGE:", err?.message);
-    console.error("Generate quizzes error STACK:", err?.stack);
+    console.error("Generate quizzes error MESSAGE:", errorDetails.message);
+    console.error("Generate quizzes error STACK:", errorDetails.stack);
 
     return NextResponse.json(
       {
-        error: err?.message || "Failed to generate quizzes",
-        stack: err?.stack || null,
+        error: errorDetails.message,
+        stack: errorDetails.stack,
       },
       { status: 500 },
     );
