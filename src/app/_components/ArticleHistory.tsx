@@ -22,17 +22,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import BookIcon from "../icons/BookIcon";
 import { Skeleton } from "@/components/ui/skeleton";
+import { QuizQuestion } from "./quiz-utils";
 
 type ArticleHistoryProps = {
   setStep: React.Dispatch<React.SetStateAction<number>>;
   selectedArticleId: string;
   setHistoryQuiz: React.Dispatch<React.SetStateAction<QuizQuestion[]>>;
-};
-type QuizQuestion = {
-  question: string;
-  options: string[];
-  correctAnswer?: string;
-  answer?: string;
 };
 
 export default function ArticleHistory({

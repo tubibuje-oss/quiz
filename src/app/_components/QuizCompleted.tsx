@@ -4,26 +4,13 @@ import WrongIcon from "../icons/WrongIcon";
 import CorrectIcon from "../icons/CorrectIcon";
 import ReloadIcon from "../icons/ReloadIcon";
 import BookMarkIcon from "../icons/BookMarkIcon";
+import { QuizResult } from "./quiz-utils";
 
 type QuickTestProps = {
   setStep: React.Dispatch<React.SetStateAction<number>>;
-  result: {
-    question: string;
-    selected: string;
-    correct: number;
-    isCorrect: boolean;
-  }[];
+  result: QuizResult[];
   setSelectedOptions: React.Dispatch<React.SetStateAction<number[]>>;
-  setResult: React.Dispatch<
-    React.SetStateAction<
-      {
-        question: string;
-        selected: string;
-        correct: number;
-        isCorrect: boolean;
-      }[]
-    >
-  >;
+  setResult: React.Dispatch<React.SetStateAction<QuizResult[]>>;
 };
 
 export default function QuizCompleted({

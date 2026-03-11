@@ -13,28 +13,13 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useState } from "react";
-
-type QuizQuestion = {
-  question: string;
-  options: string[];
-  correctAnswer?: string;
-  answer?: string;
-};
+import { QuizQuestion, QuizResult, resolveCorrectAnswer } from "./quiz-utils";
 
 type HistoryQuickTestProps = {
   setStep: React.Dispatch<React.SetStateAction<number>>;
   historyQuiz: QuizQuestion[];
   setSelectedOptions: React.Dispatch<React.SetStateAction<number[]>>;
-  setResult: React.Dispatch<
-    React.SetStateAction<
-      {
-        question: string;
-        selected: string;
-        correct: number;
-        isCorrect: boolean;
-      }[]
-    >
-  >;
+  setResult: React.Dispatch<React.SetStateAction<QuizResult[]>>;
 };
 
 export default function HistoryQuickTest({
@@ -48,17 +33,16 @@ export default function HistoryQuickTest({
   const currentQuestion = historyQuiz[currentQuestionIndex];
 
   const handleAnswerClick = (optionIndex: number) => {
-    const correctIndex = Number(currentQuestion.answer);
+    const selectedAnswer = currentQuestion.options[optionIndex] ?? "";
+    const correctAnswer = resolveCorrectAnswer(currentQuestion);
     setSelectedOptions((prev) => [...prev, optionIndex]);
     setResult((prev) => [
       ...prev,
       {
         question: currentQuestion.question,
-        selected: currentQuestion.options[optionIndex],
-        correct: correctIndex,
-        isCorrect:
-          currentQuestion.options[optionIndex] ===
-          currentQuestion.options[correctIndex],
+        selected: selectedAnswer,
+        correct: correctAnswer,
+        isCorrect: selectedAnswer === correctAnswer,
       },
     ]);
 

@@ -20,13 +20,7 @@ import BookIcon from "../icons/BookIcon";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import axios from "axios";
-
-type QuizQuestion = {
-  question: string;
-  options: string[];
-  correctAnswer?: string;
-  answer?: string;
-};
+import { QuizQuestion } from "./quiz-utils";
 
 type SummarizedCardProps = {
   quiz: QuizQuestion[];

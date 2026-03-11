@@ -9,13 +9,7 @@ import QuizCompleted from "./QuizCompleted";
 import ArticleHistory from "./ArticleHistory";
 import HistoryQuickTest from "./HistoryQuickTest";
 import HistoryQuizCompleted from "./HistoryQuizCompleted";
-
-type QuizQuestion = {
-  question: string;
-  options: string[];
-  correctAnswer?: string;
-  answer?: string;
-};
+import { QuizQuestion, QuizResult } from "./quiz-utils";
 
 type SwitchCardsProps = {
   step: number;
@@ -35,14 +29,7 @@ export default function SwitchCards({
   const [historyQuiz, setHistoryQuiz] = useState<QuizQuestion[]>([]);
   const [articleId, setArticleId] = useState<string>("");
   const [, setSelectedOptions] = useState<number[]>([]);
-  const [result, setResult] = useState<
-    {
-      question: string;
-      selected: string;
-      correct: number;
-      isCorrect: boolean;
-    }[]
-  >([]);
+  const [result, setResult] = useState<QuizResult[]>([]);
 
   console.log("articleId in SwitchCards:", articleId);
 

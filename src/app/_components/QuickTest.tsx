@@ -13,27 +13,13 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useState } from "react";
+import { QuizQuestion, QuizResult, resolveCorrectAnswer } from "./quiz-utils";
 
 type QuickTestProps = {
   quiz?: QuizQuestion[];
   setStep: React.Dispatch<React.SetStateAction<number>>;
-  setResult: React.Dispatch<
-    React.SetStateAction<
-      {
-        question: string;
-        selected: string;
-        correct: number;
-        isCorrect: boolean;
-      }[]
-    >
-  >;
+  setResult: React.Dispatch<React.SetStateAction<QuizResult[]>>;
   setSelectedOptions: React.Dispatch<React.SetStateAction<number[]>>;
-};
-
-type QuizQuestion = {
-  question: string;
-  options: string[];
-  answer?: string;
 };
 
 export default function QuickTest({
@@ -50,17 +36,16 @@ export default function QuickTest({
   const currentQuestion = parsedQuiz[currentQuestionIndex];
 
   const handleAnswerClick = (optionIndex: number) => {
-    const correctIndex = Number(currentQuestion.answer);
+    const selectedAnswer = currentQuestion.options[optionIndex] ?? "";
+    const correctAnswer = resolveCorrectAnswer(currentQuestion);
     setSelectedOptions((prev) => [...prev, optionIndex]);
     setResult((prev) => [
       ...prev,
       {
         question: currentQuestion.question,
-        selected: currentQuestion.options[optionIndex],
-        correct: correctIndex,
-        isCorrect:
-          currentQuestion.options[optionIndex] ===
-          currentQuestion.options[correctIndex],
+        selected: selectedAnswer,
+        correct: correctAnswer,
+        isCorrect: selectedAnswer === correctAnswer,
       },
     ]);
 
