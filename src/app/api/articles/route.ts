@@ -12,8 +12,19 @@ function getErrorMessage(error: unknown) {
   return error instanceof Error ? error.message : String(error);
 }
 
+const hasClerkConfig = Boolean(
+  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY && process.env.CLERK_SECRET_KEY,
+);
+
 export async function POST(req: NextRequest) {
   try {
+    if (!hasClerkConfig) {
+      return NextResponse.json(
+        { error: "Clerk authentication is not configured" },
+        { status: 503 },
+      );
+    }
+
     const { userId } = await auth();
 
     if (!userId) {
@@ -86,6 +97,13 @@ export async function POST(req: NextRequest) {
 
 export async function GET() {
   try {
+    if (!hasClerkConfig) {
+      return NextResponse.json(
+        { success: true, articles: [] },
+        { status: 200 },
+      );
+    }
+
     const { userId } = await auth();
 
     if (!userId) {
