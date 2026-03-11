@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../../lib/prisma";
 
+export const dynamic = "force-dynamic";
+
 function getErrorMessage(error: unknown) {
   return error instanceof Error ? error.message : "failed to get article";
 }
@@ -10,6 +12,13 @@ export async function GET(
   context: { params: Promise<{ articleId: string }> },
 ) {
   try {
+    if (!process.env.DATABASE_URL) {
+      return NextResponse.json(
+        { success: false, error: "Database is not configured" },
+        { status: 503 },
+      );
+    }
+
     const { articleId } = await context.params;
 
     const article = await prisma.article.findUnique({
