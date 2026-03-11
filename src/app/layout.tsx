@@ -15,14 +15,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  if (!clerkPubKey) throw new Error("Missing Clerk publishable key!");
+  const content = <SidebarProvider>{children}</SidebarProvider>;
+
   return (
     <html lang="en">
-      <ClerkProvider publishableKey={clerkPubKey}>
-        <body className="antialiased">
-          <SidebarProvider>{children}</SidebarProvider>
-        </body>
-      </ClerkProvider>
+      <body className="antialiased">
+        {clerkPubKey ? (
+          <ClerkProvider publishableKey={clerkPubKey}>{content}</ClerkProvider>
+        ) : (
+          content
+        )}
+      </body>
     </html>
   );
 }
