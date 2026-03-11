@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../lib/prisma";
 import { auth, currentUser } from "@clerk/nextjs/server";
 
+export const dynamic = "force-dynamic";
+
 type CreateArticleBody = {
   title: string;
   content: string;
