@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY,
-});
+export const dynamic = "force-dynamic";
 
 type GenerateBody = {
   content?: string;
@@ -64,6 +62,10 @@ export async function POST(request: NextRequest) {
         { status: 500 },
       );
     }
+
+    const ai = new GoogleGenAI({
+      apiKey: process.env.GEMINI_API_KEY,
+    });
 
     const body: GenerateBody = await request.json();
     const { content } = body;

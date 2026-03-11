@@ -2,9 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
 import prisma from "../../../../../../lib/prisma";
 
-const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY,
-});
+export const dynamic = "force-dynamic";
 
 type QuizPayload = {
   question: string;
@@ -52,6 +50,10 @@ export async function POST(
         { status: 500 },
       );
     }
+
+    const ai = new GoogleGenAI({
+      apiKey: process.env.GEMINI_API_KEY,
+    });
 
     const { articleId } = await context.params;
     console.log("articleId:", articleId);
