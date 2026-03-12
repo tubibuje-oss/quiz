@@ -10,28 +10,46 @@ const hasClerk = Boolean(process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY);
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-20 flex h-[73px] w-full items-center justify-between border-b border-emerald-950/10 bg-[#12312d]/92 px-5 text-[#f8f2e7] shadow-[0_10px_30px_rgba(18,49,45,0.24)] backdrop-blur sm:px-6 lg:px-8">
-      <div className="flex items-center gap-4">
-        <div className="font-[family:var(--font-display)] text-[24px] font-semibold tracking-[0.01em] text-[#f8f2e7]">
-          Quiz app
+    <header className="sticky top-0 z-20 border-b border-[#e7d6bf]/80 bg-[#f8f2e8]/78 backdrop-blur-xl">
+      <div className="mx-auto flex h-[88px] w-full max-w-[1580px] items-center justify-between px-5 sm:px-6 lg:px-8">
+        <div className="flex items-center gap-4">
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#1f3142] text-[15px] font-semibold tracking-[0.18em] text-[#f3c58a] shadow-[0_14px_30px_rgba(31,49,66,0.18)]">
+            QZ
+          </div>
+          <div>
+            <div className="font-[family:var(--font-display)] text-[26px] font-semibold tracking-[0.01em] text-[#1f1a17]">
+              Quiz Atelier
+            </div>
+            <div className="text-[11px] font-semibold tracking-[0.22em] text-[#8d6f52] uppercase">
+              Read. Distill. Challenge.
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="flex items-center gap-3">
-        {hasClerk ? (
-          <>
-            <SignedOut>
-              <SignInButton />
-              <SignUpButton>
-                <button className="h-10 cursor-pointer rounded-full bg-[#f1a94e] px-5 text-sm font-semibold tracking-[0.04em] text-[#1e2f2b] uppercase transition-colors hover:bg-[#e79a38]">
-                  Sign Up
-                </button>
-              </SignUpButton>
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-          </>
-        ) : null}
+        <div className="flex items-center gap-3">
+          {hasClerk ? (
+            <>
+              <SignedOut>
+                <SignInButton>
+                  <button className="h-11 cursor-pointer rounded-full border border-[#d8c1a1] bg-white/70 px-5 text-sm font-semibold tracking-[0.08em] text-[#3d3127] uppercase transition-colors hover:bg-white">
+                    Sign In
+                  </button>
+                </SignInButton>
+                <SignUpButton>
+                  <button className="h-11 cursor-pointer rounded-full bg-[#1f3142] px-5 text-sm font-semibold tracking-[0.08em] text-[#f5e8d5] uppercase shadow-[0_16px_28px_rgba(31,49,66,0.16)] transition-colors hover:bg-[#182736]">
+                    Start Free
+                  </button>
+                </SignUpButton>
+              </SignedOut>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
+            </>
+          ) : (
+            <div className="rounded-full border border-[#d8c1a1] bg-white/70 px-4 py-2 text-[11px] font-semibold tracking-[0.2em] text-[#8d6f52] uppercase">
+              Demo mode
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );

@@ -119,17 +119,37 @@ export default function InputCard({
   };
 
   return (
-    <Card className="w-full rounded-[2rem] border border-amber-200/70 bg-[linear-gradient(180deg,rgba(255,250,240,0.98)_0%,rgba(248,239,221,0.98)_100%)] shadow-[0_30px_80px_rgba(92,66,28,0.14)]">
-      <CardHeader className="space-y-3 px-6 pb-0 pt-6 sm:px-8 sm:pt-8">
-        <div className="flex items-center gap-2.5">
-          <GeminiIcon />
-          <CardTitle className="font-[family:var(--font-display)] text-[2rem] font-semibold leading-none tracking-[0.01em] text-stone-950 sm:text-[2.15rem]">
-            Article Quiz Generator
-          </CardTitle>
+    <Card className="w-full overflow-hidden rounded-[2rem] border border-white/70 bg-[linear-gradient(160deg,rgba(255,252,247,0.98),rgba(241,231,215,0.96))] shadow-[0_36px_90px_rgba(43,31,19,0.12)]">
+      <div className="h-2 bg-[linear-gradient(90deg,#1f3142_0%,#c6864c_52%,#f3c58a_100%)]" />
+      <CardHeader className="space-y-4 px-6 pb-0 pt-6 sm:px-8 sm:pt-8">
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div className="space-y-3">
+            <div className="flex items-center gap-2.5">
+              <GeminiIcon />
+              <div className="rounded-full border border-[#d9c2a2] bg-[#fff8ef] px-3 py-1 text-[11px] font-semibold tracking-[0.22em] text-[#8d6f52] uppercase">
+                Studio
+              </div>
+            </div>
+            <CardTitle className="font-[family:var(--font-display)] text-[2.1rem] font-semibold leading-none tracking-[0.01em] text-[#211915] sm:text-[2.4rem]">
+              Turn any article into a polished quiz session
+            </CardTitle>
+          </div>
+          <div className="rounded-[1.5rem] border border-[#dec6a8] bg-white/65 px-4 py-3 text-right shadow-[0_14px_30px_rgba(140,105,69,0.08)]">
+            <div className="text-[11px] font-semibold tracking-[0.22em] text-[#8d6f52] uppercase">
+              Flow
+            </div>
+            <div className="mt-1 text-sm text-[#3f342b]">
+              Paste article
+              <br />
+              Generate summary
+              <br />
+              Launch quiz
+            </div>
+          </div>
         </div>
         <CardDescription className="max-w-2xl text-[15px] leading-7 text-stone-600">
-          Paste your article below to generate a summarize and quiz question.
-          Your articles will saved in the sidebar for future reference.
+          Paste your source material, let the app distill the key ideas, then
+          turn it into a quick high-signal test you can revisit from history.
         </CardDescription>
       </CardHeader>
 
@@ -137,7 +157,7 @@ export default function InputCard({
         <form>
           <div className="flex flex-col gap-7">
             {errorMessage ? (
-              <div className="rounded-2xl border border-rose-300/70 bg-rose-50/90 px-4 py-3 text-sm leading-6 text-rose-700">
+              <div className="rounded-2xl border border-rose-300/70 bg-rose-50/90 px-4 py-3 text-sm leading-6 text-rose-700 shadow-[0_10px_30px_rgba(190,24,93,0.08)]">
                 {errorMessage}
               </div>
             ) : null}
@@ -161,7 +181,7 @@ export default function InputCard({
                     setErrorMessage("");
                   }
                 }}
-                className="h-12 rounded-xl border-stone-300 bg-[#fffdf8] px-4 text-[15px] text-stone-900 shadow-none placeholder:text-stone-400 focus-visible:ring-2 focus-visible:ring-[#d38a2c]/35"
+                className="h-13 rounded-2xl border-[#dbc3a4] bg-white/80 px-4 text-[15px] text-stone-900 shadow-none placeholder:text-stone-400 focus-visible:ring-2 focus-visible:ring-[#1f3142]/20"
               />
             </div>
 
@@ -177,7 +197,7 @@ export default function InputCard({
                 required
                 placeholder="Paste your article content here..."
                 value={content}
-                className="min-h-[260px] rounded-2xl border-stone-300 bg-[#fffdf8] px-4 py-3 text-[15px] leading-7 text-stone-900 shadow-none placeholder:text-stone-400 focus-visible:ring-2 focus-visible:ring-[#d38a2c]/35"
+                className="min-h-[280px] rounded-[1.6rem] border-[#dbc3a4] bg-white/78 px-4 py-3 text-[15px] leading-7 text-stone-900 shadow-none placeholder:text-stone-400 focus-visible:ring-2 focus-visible:ring-[#1f3142]/20"
                 onChange={(e) => {
                   setContent(e.target.value);
                   if (errorMessage) {
@@ -193,7 +213,7 @@ export default function InputCard({
       <CardFooter className="justify-end px-6 pb-6 pt-0 sm:px-8 sm:pb-8">
         <Button
           type="button"
-          className="h-11 rounded-xl bg-[#1c5c52] px-5 text-[13px] font-semibold tracking-[0.12em] text-[#f8f2e7] uppercase shadow-[0_18px_36px_rgba(28,92,82,0.2)] transition-colors hover:bg-[#144840] disabled:bg-stone-300"
+          className="h-12 rounded-full bg-[#1f3142] px-6 text-[13px] font-semibold tracking-[0.18em] text-[#f5e8d5] uppercase shadow-[0_18px_38px_rgba(31,49,66,0.2)] transition-colors hover:bg-[#182736] disabled:bg-stone-300"
           disabled={!title || !content || loading}
           onClick={handleGenerate}
         >
